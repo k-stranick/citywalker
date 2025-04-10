@@ -28,12 +28,12 @@ export const ButtonColor = {
         color: 'rgb(235, 212, 111)'
     },
     Nav: {
-        color: 'rgb(235, 212, 111)'
+        color: 'rgba(247, 163, 54, 0.8)'
     }
 
 }
 
 export const TabBarBackgroundColor = {
-    backgroundColor: 'rgba(248, 180, 90, 0.8)',
+    backgroundColor: 'rgba(247, 163, 54, 0.8)',
 
 };
