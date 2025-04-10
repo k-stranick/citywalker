@@ -1,35 +1,79 @@
-// import {
-//   View,
-//   Text,
-//   Image,
-//   Pressable,
-//   StyleSheet,
-//   TouchableOpacity,
-// } from "react-native";
-
-// components/ui/base/Card.tsx
 import React from "react";
-import { View, StyleSheet, ViewStyle, StyleProp } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  StyleProp,
+  ViewStyle,
+  ImageSourcePropType,
+} from "react-native";
+import { ThemedView } from "@/components/ui/layout/ThemedView";
+import { ThemedText } from "@/components/ui/layout/ThemedText";
 
 type CardProps = {
-  children: React.ReactNode;
+  title?: string;
+  subtitle?: string;
+  image?: ImageSourcePropType;
+  children?: React.ReactNode;
+  onPress?: () => void;
   style?: StyleProp<ViewStyle>;
+  padding?: number;
+  margin?: number;
 };
 
-export const Card = ({ children, style }: CardProps) => {
-  return <View style={[styles.card, style]}>{children}</View>;
+export const Card = ({
+  title,
+  subtitle,
+  image,
+  children,
+  onPress,
+  style,
+  padding = 16,
+  margin = 12,
+}: CardProps) => {
+  const content = (
+    <ThemedView style={[styles.card, { padding, margin }, style]}>
+      {image && <Image source={image} style={styles.image} />}
+      {title && (
+        <ThemedText type="title" style={styles.title}>
+          {title}
+        </ThemedText>
+      )}
+      {subtitle && (
+        <ThemedText type="subtitle" style={styles.subtitle}>
+          {subtitle}
+        </ThemedText>
+      )}
+      {children}
+    </ThemedView>
+  );
+
+  return onPress ? (
+    <TouchableOpacity onPress={onPress} activeOpacity={0.9}>
+      {content}
+    </TouchableOpacity>
+  ) : (
+    content
+  );
 };
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#fff",
-    borderRadius: 12,
-    padding: 16,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-    elevation: 3, // Android shadow
+    overflow: "hidden",
+  },
+  image: {
+    width: "100%",
+    height: 200,
+    borderRadius: 8,
     marginBottom: 12,
+  },
+  title: {
+    textAlign: "center",
+  },
+  subtitle: {
+    marginBottom: 8,
+    fontSize: 14,
+    textAlign: "center",
+    fontStyle: "italic",
   },
 });

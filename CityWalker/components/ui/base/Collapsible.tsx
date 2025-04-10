@@ -1,10 +1,23 @@
 import { PropsWithChildren, useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import {
+  LayoutAnimation,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  UIManager,
+} from "react-native";
 import { Icon } from "./Icon";
 import { ThemedText } from "@/components/ui/layout/ThemedText";
 import { ThemedView } from "@/components/ui/layout/ThemedView";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+
+if (
+  Platform.OS === "android" &&
+  UIManager.setLayoutAnimationEnabledExperimental
+) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 export function Collapsible({
   children,
@@ -12,12 +25,15 @@ export function Collapsible({
 }: PropsWithChildren & { title: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const theme = useColorScheme() ?? "light";
-
+  const toggleOpen = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setIsOpen((prev) => !prev);
+  };
   return (
-    <ThemedView>
+    <ThemedView style={styles.wrapper}>
       <TouchableOpacity
         style={styles.heading}
-        onPress={() => setIsOpen((value) => !value)}
+        onPress={toggleOpen}
         activeOpacity={0.8}
       >
         <Icon
@@ -35,6 +51,17 @@ export function Collapsible({
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    marginVertical: 8,
+    borderRadius: 12,
+    backgroundColor: "#B0E0E6FF",
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 3,
+  },
   heading: {
     flexDirection: "row",
     alignItems: "center",
