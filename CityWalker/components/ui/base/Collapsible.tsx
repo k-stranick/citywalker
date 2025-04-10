@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   wrapper: {
     marginVertical: 8,
     borderRadius: 12,
-    backgroundColor: "#B0E0E6FF",
+    backgroundColor: "rgba(248, 180, 90, 0.8)",
     overflow: "hidden",
     shadowColor: "#000",
     shadowOpacity: 0.5,

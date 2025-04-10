@@ -7,7 +7,7 @@ const tintColorDark = '#fff';
 export const Colors = {
     light: {
         text: '#11181C',
-        background: 'rgb(13, 171, 211)',
+        background: 'rgb(235, 212, 111)',
         tint: tintColorLight,
         icon: '#687076',
         tabIconDefault: '#687076',
@@ -21,4 +21,19 @@ export const Colors = {
         tabIconDefault: '#9BA1A6',
         tabIconSelected: '#fff',
     },
+};
+
+export const ButtonColor = {
+    CTA: {
+        color: 'rgb(235, 212, 111)'
+    },
+    Nav: {
+        color: 'rgb(235, 212, 111)'
+    }
+
+}
+
+export const TabBarBackgroundColor = {
+    backgroundColor: 'rgba(248, 180, 90, 0.8)',
+
 };
